@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: WEBSERVER
+      class: Devops
+      app: shubham
+      student: awesome
+      love: tea
+  template:
+    metadata:
+       name: my-pod
+       labels:
+         name: NGINX
+         app: WEBSERVER
+         class: Devops
+         app: shubham
+         student: awesome
+         love: tea
+    spec:
+      containers:
+        - name: container1
+          image: httpd:latest
+          ports:
+            - containerPort: 80

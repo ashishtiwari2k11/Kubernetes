@@ -1,0 +1,69 @@
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+systemctl enable --now docker
+vim /etc/containerd/config.tomal
+
+version = 2
+    [plugins]
+     [plugins."io.containerd.grpc.v1.cri"]
+      [plugins."io.containerd.grpc.v1.cri".containerd]
+       [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          runtime_type = "io.containerd.runc.v2"
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            SystemdCgroup=true
+
+systemctl restart containerd
+
+Installing kubeadm
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+
+
+
+RUN THIS COMMAND ONLY ON MASTERNODE -->>>>>
+kubeadm init
+run below command
+export KUBECONFIG=/etc/kubernetes/admin.conf
+vim .bashrc
+export KUBECONFIG=/etc/kubernetes/admin.conf     = paste this commad in last
+
+RUN BELOW COMMAND IN ALL WORKER NODE -->>>>>
+
+Join command kubeadm join 172.31.39.165:6443 --token 3rkhyh.ycg1eqzldaoampup \
+        --discovery-token-ca-cert-hash sha256:3f193efa67708aacf42301411229955106590922433716a394739959eb2e41db
+
+GO TO MASTER NODE -->>>>
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml -O
+kubectl apply -f calico.yaml
+turn on the bash completion
+kubectl run ashishpod --image=ngins
+kubectl get pods
+kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
+bash
+
+
+
