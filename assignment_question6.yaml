@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: engineer
+  namespace: aaramb1
+spec:
+  replicas: 9
+  selector:
+    app: engineer
+  template:
+    metadata:
+      labels:
+        app: engineer
+    spec:
+      containers:
+      - name: engineer-container
+        image: httpd
