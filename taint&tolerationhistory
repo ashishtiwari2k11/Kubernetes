@@ -1,0 +1,144 @@
+ 46  vim nodename.yaml
+   47  ls
+   48  kubectl apply -f nodename.yaml
+   49  ls
+   50  vim nodename.yaml
+   51  kubectl apply -f nodename.yaml
+   52  cp nodename.yaml nodeName.yaml
+   53  kubectl apply -f nodeName.yaml
+   54  vim nodename.yaml
+   55  kubectl get nodes
+   56  vim nodename.yaml
+   57  kubectl apply -f nodeName.yaml
+   58  kubectl apply -f nodename.yaml
+   59  vim nodename.yaml
+   60  kubectl apply -f nodename.yaml
+   61  vim nodename.yaml
+   62  kubectl apply -f nodename.yaml
+   63  vim nodename.yaml
+   64  kubectl apply -f nodename.yaml
+   65  vim nodename.yaml
+   66  kubectl apply -f nodename.yaml
+   67  kubectl get pods -o wide
+   68  vim nodename.yaml
+   69  kubectl delete pods deployment-nginx-55557c7cc9-*
+   70  kubectl delete deployments.apps deployment-nginx
+   71  kubectl get pods
+   72  kubectl taint node worker1.ashish.com machine=highspec:NoSchedule
+   73  kubectl taint node worker2.ashish.com machine=lowspec:NoSchedule
+   74  kubectl describe nodes worker1.ashish.com
+   75  kubectl describe nodes worker2.ashish.com | grep -i taint
+   76  ls
+   77  cp nodename.yaml toleration.yaml
+   78  vim toleration.yaml
+   79  kubectl apply -f toleration.yaml
+   80  vim toleration.yaml
+   81  kubectl apply -f toleration.yaml
+   82  vim toleration.yaml
+   83  kubectl apply -f toleration.yaml
+   84  vim toleration.yaml
+   85  kubectl apply -f toleration.yaml
+   86  vim toleration.yaml
+   87  kubectl apply -f toleration.yaml
+   88  vim toleration.yaml
+   89  kubectl apply -f toleration.yaml
+   90  vim toleration.yaml
+   91  kubectl apply -f toleration.yaml
+   92  vim toleration.yaml
+   93  kubectl get nodes worker1.ashish.com | grep -i taint
+   94  kubectl get nodes worker2.ashish.com | grep -i taint
+   95  ls
+   96  rm -rf toleration.yaml
+   97  kubectl create deployment ashish --image=nginx --replicas=5
+   98  ls
+   99  kubectl create deployment ashish --image=nginx --replicas=5 --dry-run=client -o yaml > toleration.yaml
+  100  ls
+  101  kubectl delete deployments.apps ashish
+  102  vim toleration.yaml
+  103  kubectl apply -f toleration.yaml
+  104  vim toleration.yaml
+  105  kubectl apply -f toleration.yaml
+  106  vim toleration.yaml
+  107  kubectl apply -f toleration.yaml
+  108  vim toleration.yaml
+  109  kubectl apply -f toleration.yaml
+  110  vim toleration.yaml
+  111  kubectl apply -f toleration.yaml
+  112  kubectl get pods -o wide
+  113  kubectl get deployments.apps
+  114  kubectl describe nodes worker1.ashish.com | grep -i taint
+  115  kubectl describe nodes worker2.ashish.com | grep -i taint
+  116  kubectl describe nodes worker3.ashish.com | grep -i taint
+  117  kubectl taint node worker3.ashish.com machine=lowspec:NoSchedule
+  118  kubectl describe nodes worker1.ashish.com | grep -i taint
+  119  kubectl describe nodes worker3.ashish.com | grep -i taint
+  120  kubectl get pods
+  121  kubectl get pods -o wide
+  122  kubectl describe nodes worker3.ashish.com | grep -i taint
+  123  kubectl taint node worker3.ashish.com machine=mediumspec:NoSchedule
+  124  kubectl describe nodes worker3.ashish.com | grep -i taint
+  125  kubectl taint node worker3.ashish.com machine=mediumspec:NoSchedule
+  126  kubectl taint node worker3.ashish.com machine=mediumspec:NoSchedule --overwrite
+  127  kubectl describe nodes worker3.ashish.com | grep -i taint
+  128  kubectl get pods -o wide
+  129  kubectl delete deployments.apps deployment-nginx
+  130  kubectl apply -f toleration.yaml
+  131  kubectl get pods -o wide
+  132  vim toleration.yaml
+  133  kubectl apply -f toleration.yaml
+  134  kubectl get pods -o wide
+  135  vim toleration.yaml
+  136  kubectl apply -f toleration.yaml
+  137  kubectl get pods -o wide
+  138  kubectl describe nodes master.ashish.com | grep -i taint
+  139  kubectl describe nodes master.ashish.com | grep -i taints
+  140  kubectl describe nodes master.ashish.com
+  141  vim toleration.yaml
+  142  top
+  143  ls
+  144  vim toleration.yaml
+  145  kubectl apply -f toleration.yaml
+  146  vim toleration.yaml
+  147  kubectl apply -f toleration.yaml
+  148  kubectl get pods -o wide
+  149  vim toleration.yaml
+  150  kubectl apply -f toleration.yaml
+  151  kubectl get pods -o wide
+  152  vim toleration.yaml
+  153  kubectl apply -f toleration.yaml
+  154  kubectl get pods -o wide
+  155  kubectl describe nodes worker2.ashish.com | grep -i taint
+  156  vim toleration.yaml
+  157  kubectl describe nodes worker3.ashish.com | grep -i taint
+  158  vim toleration.yaml
+  159  kubectl get pods -o wide
+  160  vim toleration.yaml
+  161  kubectl apply -f toleration.yaml
+  162  kubectl get pods -o wide
+  163  vim toleration.yaml
+  164  kubectl apply -f toleration.yaml
+  165  kubectl get pods -o wide
+  166  vim toleration.yaml
+  167  kubectl apply -f toleration.yaml
+  168  kubectl get pods -o wide
+  169  vim toleration.yaml
+  170  kubectl get pods -o wide
+  171  vim toleration.yaml
+  172  kubectl apply -f toleration.yaml
+  173  kubectl get pods -o wide
+  174  vim toleration.yaml
+  175  kubectl apply -f toleration.yaml
+  176  kubectl get pods -o wide
+  177  vim toleration.yaml
+  178  kubectl apply -f toleration.yaml
+  179  kubectl get pods -o wide
+  180  kubectl taint node worker3.ashish.com machine=mediumspec-
+  181  kubectl taint node worker3.ashish.com machine=mediumspec:NoSchedule-
+  182  kubectl describe nodes worker3.ashish.com | grep -i taint
+  183  kubectl get pods -o wide
+  184  vim toleration.yaml
+  185  kubectl apply -f toleration.yaml
+  186  kubectl get pods -o wide
+  187  vim toleration.yaml
+  188  kubectl apply -f toleration.yaml
+  189  kubectl get pods -o wide
