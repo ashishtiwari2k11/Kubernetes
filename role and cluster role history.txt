@@ -1,0 +1,156 @@
+    1  kubectl get nodes
+    2  vim role.yaml
+    3  kubectl apply -f role.yaml 
+    4  vim role.yaml
+    5  kubectl get nodes
+    6  kubectl apply -f role.yaml 
+    7  vim role.yaml
+    8  kubectl create -f role.yaml 
+    9  vim role.yaml
+   10  kubectl apply -f role.yaml 
+   11  kubectl get roles
+   12  vim rolebinding.yaml
+   13  kubectl apply -f rolebinding.yaml 
+   14  kubectl get rolebinding
+   15  kubectl auth can-i get pod -as shubham
+   16  kubectl auth can -i get pod -as shubham
+   17  kubectl auth whoami
+   18  kubectl auth can-i get pods -as shubham
+   19  vim rolebinding.yaml 
+   20  vim role
+   21  vim role.yaml 
+   22  vim rolebinding.yaml 
+   23  kubectl auth can-i get pods -as shubham
+   24  [200~kubectl auth can-i --help~
+   25  kubectl auth can-i --help
+   26  kubectl auth can-i -A
+   27  vim rolebinding.yaml 
+   28  kubectl apply -f rolebinding.yaml 
+   29  kubectl auth can-i get pods -as shubham
+   30  vim rolebinding.yaml 
+   31  kubectl apply -f rolebinding.yaml 
+   32  kubectl auth can-i get pods -as shubham
+   33  kubectl apply -f rolebinding.yaml 
+   34  vim rolebinding.yaml 
+   35  kubectl apply -f rolebinding.yaml 
+   36  kubectl auth can-i get pods -as shubham
+   37  kubectl auth can-i get pods -a shubham
+   38  kubectl auth can-i get pods shubham
+   39  kubectl auth can-i get pods as shubham
+   40  kubectl auth can-i get pods -as shubham
+   41  top
+   42  kubectl auth can-i get pods a-as shubham
+   43  kubectl auth can-i get pods --as shubham
+   44  vim role.yaml 
+   45  kubectl auth can-i get pods --as shubham
+   46  kubectl auth can-iwatch pods --as shubham
+   47  kubectl auth can-i get pods --as shubham
+   48  kubectl auth can-i create pods --as shubham
+   49  kubectl auth can-i watch pods --as shubham
+   50  kubectl auth can-i delete pods --as shubham
+   51  kubectl auth can-i list pods --as shubham
+   52  vim ClusterRole.yaml
+   53  kubectl apply -f ClusterRole.yaml 
+   54  kubectl get ClusterRole
+   55  kubectl get role
+   56  kubectl get clusterrole
+   57  kubectl get clusterrole | grep ashishclusterrole
+   58  vim ClusterRoleBinding.yaml
+   59  kubectl apply -f ClusterRoleBinding.yaml 
+   60  vim ClusterRoleBinding.yaml
+   61  vim ClusterRole.yaml 
+   62  vim ClusterRoleBinding.yaml
+   63  vim rolebinding.yaml 
+   64  vim ClusterRoleBinding.yaml
+   65  kubectl apply -f ClusterRoleBinding.yaml 
+   66  vim ClusterRoleBinding.yaml
+   67  vim rolebinding.yaml 
+   68  vim ClusterRoleBinding.yaml
+   69  vim ClusterRole.yaml 
+   70  kubectl apply -f ClusterRole.yaml 
+   71  kubectl apply -f ClusterRoleBinding.yaml 
+   72  vim ClusterRole.yaml 
+   73  vim ClusterRoleBinding.yaml
+   74  kubectl apply -f ClusterRoleBinding.yaml 
+   75  kubectl get clusterrole | grep shubhamrole
+   76  kubectl get clusterrole | grep shubham
+   77  kubectl get clusterrole
+   78  kubectl get role
+   79  kubectl get clusterroles
+   80  kubectl describe clusterrole shubhamrole
+   81  kubectl describe clusterrole ashishrole
+   82  vim role
+   83  vim role.yaml 
+   84  kubectl describe role ashishrole
+   85  kubectl get clusterrole | grep shubhamrole
+   86  vim ClusterRole.yaml 
+   87  cat ClusterRole
+   88  cat ClusterRole.yaml 
+   89  vim ClusterRoleBinding.yaml 
+   90  kubectl apply -f ClusterRoleBinding.yaml 
+   91  kubectl auth can-i get nodes --as tiwari
+   92  kubectl auth can-i get podes --as tiwari
+   93  kubectl auth can-i get pods --as tiwari
+   94  kubectl auth can-i list pods --as tiwari
+   95  kubectl auth can-i create pods --as=system:group:tiwari
+   96  kubectl auth can-i get pods --as=system:group:tiwari
+   97  vim ClusterRoleBinding.yaml 
+   98  kubectl auth can-i get pods --as=shubham:group:tiwari
+   99  kubectl auth can-i get pods --as=shubham
+  100  kubectl apply -f ClusterRoleBinding.yaml 
+  101  vim ClusterRoleBinding.yaml 
+  102  vim ClusterRole.yaml 
+  103  vim ClusterRoleBinding.yaml 
+  104  kubectl apply -f ClusterRoleBinding.yaml 
+  105  vim ClusterRole.yaml 
+  106  kubectl apply -f ClusterRoleBinding.yaml 
+  107  kubectl apply -f ClusterRole.yaml 
+  108  kubectl apply -f ClusterRoleBinding.yaml 
+  109  vim ClusterRole.yaml 
+  110  vim ClusterRoleBinding.yaml 
+  111  kubectl apply -f ClusterRoleBinding.yaml 
+  112  kubectl get clusterrolebinding
+  113  kubectl get clusterrolebinding | grep shubhamrole
+  114  vim ClusterRoleBinding.yaml 
+  115  kubectl applyn -f ClusterRoleBinding.yaml 
+  116  kubectl apply -f ClusterRoleBinding.yaml 
+  117  kubectl get clusterrolebinding | grep shubhamrole
+  118  kubectl delete clusterrolebinding clusterrolebinding | grep shubhamrole
+  119  read-secrets-global                                    ClusterRole/shubhamrole                                                            13m
+  120  root@master:~# vim ClusterRoleBinding.yaml
+  121  root@master:~# kubectl applyn -f ClusterRoleBinding.yaml
+  122  error: unknown command "applyn" for "kubectl"
+  123  Did you mean this?
+  124  root@master:~# kubectl apply -f ClusterRoleBinding.yaml
+  125  clusterrolebinding.rbac.authorization.k8s.io/Ashish ClusterRoleBinding created
+  126  root@master:~# kubectl get clusterrolebinding | grep shubhamrole
+  127  Ashish ClusterRoleBinding                              ClusterRole/shubhamrole                                                            4s
+  128  read-secrets-global                                    ClusterRole/shubhamrole                                                            14m
+  129  root@master:~# kubectl get clusterrolebinding | grep shubhamrole
+  130  Ashish ClusterRoleBinding                              ClusterRole/shubhamrole                                                            8s
+  131  read-secrets-global
+  132  root@master:~# kubectl get clusterrolebinding | grep shubhamrole
+  133  root@master:~# kubectl apply -f ClusterRoleBinding.yaml
+  134  kubectl get nodes
+  135  kubectl get role
+  136  kubectl get clusterrole
+  137  vim ClusterRoleBinding.yaml 
+  138  kubectl get clusterrolebinding | grep Ashish ClusterRoleBinding
+  139  kubectl get clusterrolebinding | grep "Ashish ClusterRoleBinding"
+  140  vim ClusterRoleBinding.yaml 
+  141  kubectl apply -f ClusterRoleBinding.yaml 
+  142  kubectl get clusterrolebinding | grep "Ashish ClusterRoleBinding"
+  143  kubectl get clusterrolebinding
+  144  kubectl get clusterrolebinding | grep shubham
+  145  kubectl delete clusterrolebinding read-secrets-global
+  146  kubectl get clusterrolebinding | grep shubham
+  147  vim ClusterRoleBinding.yaml 
+  148  kubectl auth can-i create pods --as=system:group:tiwari
+  149  kubectl auth can-i get pods --as=system:group:tiwari
+  150  ls
+  151  pwd
+  152  ls
+  153  cp Cluste* /home/
+  154  ls /home/
+  155  cp role* /home/
+  156  history > "role and cluster role".txt
