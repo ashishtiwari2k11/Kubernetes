@@ -1,0 +1,225 @@
+    1  hostname
+    2  sudo apt-get update
+    3  sudo apt-get install ca-certificates curl gnupg
+    4  sudo install -m 0755 -d /etc/apt/keyrings
+    5  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    6  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    7  echo   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    8    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    9  sudo apt-get update
+   10  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+   11  vim /etc/containerd/config.toml 
+   12  systemctl restart containerd
+   13  sudo apt-get update
+   14  sudo apt-get install -y apt-transport-https ca-certificates curl
+   15  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+   16  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   17  sudo apt-get update
+   18  sudo apt-get install -y kubelet kubeadm kubectl
+   19  sudo apt-mark hold kubelet kubeadm kubectl
+   20  kubeadm init
+   21  export KUBECONFIG=/etc/kubernetes/admin.conf
+   22  curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml -O
+   23  kubectl apply -f calico.yaml
+   24  kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
+   25  hostnamectl set-hostname master.ashish.com
+   26  bash
+   27  export KUBECONFIG=/etc/kubernetes/admin.conf
+   28  kubectl get nodes
+   29  top
+   30  mkdir database
+   31  cd database/
+   32  ls
+   33  vim namespace.yaml
+   34  kubectl apply -f namespace.yaml 
+   35  kubectl get namespaces 
+   36  vim database.yaml
+   37  kubectl apply -f database.yaml 
+   38  kubectl get deployments.apps 
+   39  kubectl get deployments.apps -n mywebsite
+   40  kubectl get pods -n mywebsite 
+   41  vim database.yaml 
+   42  kubectl apply -f database.yaml 
+   43  vim database.yaml 
+   44  kubectl apply -f database.yaml 
+   45  kubectl get svc -n mywebsite 
+   46  kubectl get pods -n mywebsite 
+   47  kubectl exec mydb-8f97cd878-49xr7 -it -- bash
+   48  kubectl exec mydb-8f97cd878-49xr7 -it -- bash -n my
+   49  kubectl exec mydb-8f97cd878-49xr7 -it -- bash -n mywebsite
+   50  kubectl config set-context --current --namespace=default
+   51  kubectl exec mydb-8f97cd878-49xr7 -it -- bash 
+   52  kubectl config set-context --current --namespace=mywebsite
+   53  kubectl exec mydb-8f97cd878-49xr7 -it -- bash 
+   54  kubectl get deployments.apps 
+   55  cd ..
+   56  ls
+   57  mkdir wordpress
+   58  cd wordpress/
+   59  ls
+   60  cp -rvf /root/database* ./database.yaml
+   61  ls
+   62  vim database.yaml/
+   63  rm -rf database.yaml/
+   64  cp -rvf /root/database/database.yaml ./wordpress.yaml
+   65  ls
+   66  vim wordpress.yaml 
+   67  vim /root/database/database.yaml 
+   68  vim wordpress.yaml 
+   69  kubectl get svc
+   70  vim wordpress.yaml 
+   71  kubectl apply -f wordpress.yaml 
+   72  kubectl get deployments.apps 
+   73  kubectl expose deployment mywp --port --target-port 80 --type NodePort --dry-run=client -o yaml > exposedeployment.yaml
+   74  kubectl expose deployment mywp --port --target port 80 --type NodePort --dry-run=client -o yaml > exposedeployment.yaml
+   75  kubectl expose deployment mywp --port --target-Pwqort 80 --type NodePort --dry-run=client -o yaml > exposedeployment.yaml
+   76  kubectl expose deployment mywp --port --target-Port 80 --type NodePort --dry-run=client -o yaml > exposedeployment.yaml
+   77  kubectl expose deployment mywp --port=80 --target-port=80 --type=NodePort --dry-run=client -o yaml > exposedeployment.yaml
+   78  ls
+   79  kubectl apply -f exposedeployment.yaml 
+   80  kubectl get pods -o wide
+   81  kubectl get svc
+   82  top
+   83  kubectl get pods 
+   84  ls
+   85  cd ..
+   86  ls
+   87  vim database/database.yaml 
+   88  kubectl create configmap app-db --from-literal=MYSQL_ROOT_PASSWORD=redhat --from-literal=MYSQL_DATABASE=tiwari -n mywebsite
+   89  kubectl get configmap -n mywebsite 
+   90  kubectl describe configmap app-db 
+   91  kubectl create configmap app-db --from-literal=MYSQL_ROOT_PASSWORD=redhat --from-literal=MYSQL_DATABASE=tiwari -n mywebsite --dry-run=client -o yaml > app-db_configmap.yaml
+   92  ls
+   93  kubectl delete configmap app-db 
+   94  rm -rf app-db_configmap.yaml 
+   95  kubectl create configmap app-db --from-literal=MYSQL_ROOT_PASSWORD=redhat --from-literal=MYSQL_DATABASE=tiwari -n mywebsite --dry-run=client -o yaml > app-db_configmap.yaml
+   96  ls
+   97  kubectl apply -f app-db_configmap.yaml 
+   98  kubectl describe configmap app-db 
+   99  kubectl get svc
+  100  kubectl delete svc db-svc 
+  101  sl
+  102  ls
+  103  cd database/
+  104  ls
+  105  vi database.yaml 
+  106  cd ..
+  107  vim db-svc.yaml
+  108  kubectl apply -f db-svc.yaml 
+  109  vim db-svc.yaml
+  110  kubectl apply -f db-svc.yaml 
+  111  vim db-svc.yaml
+  112  kubectl apply -f db-svc.yaml 
+  113  kubectl get svc
+  114  ls
+  115  vim app-db_configmap.yaml 
+  116  kubectl create configmap app-wp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=app-db --dry-run=client -o yaml > app-wp_configmap.yaml
+  117  vim db-svc.yaml 
+  118  kubectl get deployments.apps 
+  119  kubectl create configmap app-wp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari --dry-run=client -o yaml > app-wp_configmap.yaml
+  120  kubectl create configmap app-wp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari --dry-run=client -o yaml > app-wp_configmap.yaml -n mywebsite
+  121  kubectl get svc
+  122  kubectl get pods
+  123  history 
+  124  kubectl get pods 
+  125  kubectl exec mydb-8f97cd878-49xr7 -it -- bash
+  126  ls
+  127  kubectl get con
+  128  kubectl get configmaps 
+  129  kubectl create configmap app-wp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari --dry-run=client -o yaml > app-wp_configmap.yaml
+  130  kubectl create configmap app-wp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari
+  131  kubectl create configmap appwp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari
+  132  kubectl create configmap -h
+  133  kubectl create configmap appwp --from-literal= WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari
+  134  kubectl create configmap appwp --from-literal=WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari
+  135  kubectl create configmap appwp --from-literal=WORDPRESS_DB_HOST=10.98.110.177 --from-literal=WORDPRESS_DB_USER=root --from-literal=WORDPRESS_DB_PASSWORD=redhat --from-literal=WORDPRESS_DB_NAME=tiwari --dry-run=client -o yaml > appwp_configmap.yaml
+  136  kubectl get configmaps 
+  137  top
+  138  cd database/
+  139  ls
+  140  cd ..
+  141  ls
+  142  cd database/
+  143  ls
+  144  cd ..
+  145  cd wordpress/
+  146  ;s
+  147  cd ..
+  148  ls
+  149  cd database/
+  150  ls
+  151  vim database.yaml 
+  152  cd ..
+  153  ls
+  154  cd wordpress/
+  155  ls
+  156  vim wordpress.yaml 
+  157  vim exposedeployment.yaml 
+  158  cd ..
+  159  ls
+  160  cd database/
+  161  l
+  162  vim database.yaml 
+  163  cp database.yaml database1.yaml 
+  164  vim database1.yaml 
+  165  kubectl delete deployments.apps mydb 
+  166  kubectl delete deployments.apps mywp 
+  167  vim database1.yaml 
+  168  kubectl apply -f database1.yaml 
+  169  kubectl get deployments.apps 
+  170  kubectl get pods
+  171  kubectl exec mydb-54cf6894df-s99tk -it -- bash
+  172  ls
+  173  vim database1
+  174  vim database1.yaml 
+  175  cd ..
+  176  ls
+  177  vim app-db_configmap.yaml 
+  178  vim app-wp_configmap.yaml 
+  179  vim appwp_configmap.yaml 
+  180  kubectl get svc
+  181  cd wordpress/
+  182  ls
+  183  cp wordpress.yaml wordpress1.yaml
+  184  vim wordpress1.yaml 
+  185  kubectl apply -f wordpress1.yaml 
+  186  kubectl get deployments.apps 
+  187  kubectl get sbv
+  188  kubectl get svc
+  189  kubectl delete svc mywp 
+  190  kubectl expose deployment mywp --port 80 --target-port 80 --type NodePort--dry-run=client -o yaml > mywpsvc1.yaml
+  191  kubectl get deployments.apps 
+  192  kubectl expose deployment mywp --port=80 --target-port=80 --type NodePort--dry-run=client -o yaml > mywpsvc1.yaml
+  193  history 
+  194  kubectl expose deployment mywp --port=80 --target-port=80 --type=NodePort --dry-run=client -o yaml > exposedeployment.yaml
+  195  ls
+  196  cp exposedeployment.yaml mywp1expose.yaml
+  197  kubectl apply -f mywp1expose.yaml 
+  198  kubectl get svc
+  199  kubectl get pods -o widw
+  200  kubectl get pods -o wide
+  201  kubectl get svc
+  202  kubectl get pods -o wide
+  203  history 
+  204  kubectl exec mydb-54cf6894df-s99tk -it -- bash
+  205  ls
+  206  cd
+  207  ls
+  208  vim app-db_configmap.yaml 
+  209  vim appwp_configmap.yaml 
+  210  ls
+  211  cd database/
+  212  ls
+  213  vim database1.yaml 
+  214  ls
+  215  cd ..
+  216  ls
+  217  cd wordpress/
+  218  ls
+  219  vim wordpress1.yaml 
+  220  vim mywp1expose.yaml 
+  221  vim mywpsvc1.yaml 
+  222  cd ..
+  223  ls
+  224  history > wordpress&database.txt
+  225  history > wordpressdatabase.txt
