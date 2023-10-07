@@ -1,0 +1,29 @@
+    1  hostname
+    2  top
+    3  sudo apt-get update
+    4  sudo apt-get install ca-certificates curl gnupg
+    5  sudo install -m 0755 -d /etc/apt/keyrings
+    6  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    7  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    8  echo   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    9    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   10  sudo apt-get update
+   11  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+   12  systemctl enable --now docker
+   13  vim /etc/containerd/config.toml 
+   14  systemctl restart containerd
+   15  sudo apt-get update
+   16  sudo apt-get install -y apt-transport-https ca-certificates curl
+   17  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+   18  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   19  sudo apt-get update
+   20  sudo apt-get install -y kubelet kubeadm kubectl
+   21  sudo apt-mark hold kubelet kubeadm kubectl
+   22  kubeadm init
+   23  export KUBECONFIG=/etc/kubernetes/admin.conf
+   24  curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml -O
+   25  kubectl apply -f calico.yaml
+   26  kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
+   27  hostnamectl set-hostname master.ashish.com
+   28  bash
+   29  history > secrehistorywithwordpress.txt
