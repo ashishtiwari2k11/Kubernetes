@@ -1,0 +1,29 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywp
+  namespace: mywebsite
+spec:
+  replicas: 1
+  selector:
+         matchLabels:
+                 app: mywp
+  template:
+         metadata:
+                name: mywp
+                labels:
+                    app: mywp
+         spec:
+                containers:
+                      - name: container2
+                        image: wordpress
+                        env:
+                         - name: WORDPRESS_DB_HOST
+                           value: 10.101.207.137
+                         - name: WORDPRESS_DB_USER
+                           value: root
+                         - name: WORDPRESS_DB_PASSWORD
+                           value: redhat
+                         - name: WORDPRESS_DB_NAME
+                           value: ashish
